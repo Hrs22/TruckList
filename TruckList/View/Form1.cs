@@ -15,34 +15,23 @@ namespace TruckList
     public partial class Form1 : Form
     {
         TruckController trucksController = new TruckController();
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'truckDBDataSet.TruckTable' table. You can move, or remove it, as needed.
-            this.truckTableTableAdapter.Fill(this.truckDBDataSet.TruckTable);
             dgvTruck.DataSource = trucksController.GetAll();
-
         }
+
         private void RefreshTable()
         {
             dgvTruck.DataSource = trucksController.ShowAllTrucks();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void btnadd(object sender, EventArgs e)
         {
             TruckTable truck = new TruckTable();
             truck.Brand = textBrand.Text;
@@ -51,7 +40,7 @@ namespace TruckList
             RefreshTable();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btndelate(object sender, EventArgs e)
         {
             DataGridViewRow row = dgvTruck.CurrentRow;
             int id = int.Parse(row.Cells[0].Value.ToString());
@@ -59,7 +48,7 @@ namespace TruckList
             RefreshTable();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void btnupdate(object sender, EventArgs e)
         {
             DataGridViewRow row = dgvTruck.CurrentRow;
             int id = int.Parse(row.Cells[0].Value.ToString());

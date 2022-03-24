@@ -24,6 +24,7 @@ namespace TruckList.Controller
                 return trucks;
             }
         }
+
         public void CreateTrucks(TruckTable t)
         {
             using (MainModel model = new MainModel())
@@ -31,9 +32,9 @@ namespace TruckList.Controller
                 t.Id = model.TruckTables.ToList().LastOrDefault().Id + 1;
                 model.TruckTables.Add(t);
                 model.SaveChanges();
-
             }
         }
+
         public void DelateTrucks(int id)
         {
             using (MainModel model = new MainModel())

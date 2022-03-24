@@ -30,18 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dgvTruck = new System.Windows.Forms.DataGridView();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.brandDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.truckTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.textBrand = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.textPrice = new System.Windows.Forms.TextBox();
-            this.truckDBDataSet = new TruckList.TruckDBDataSet();
-            this.truckTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.truckTableTableAdapter = new TruckList.TruckDBDataSetTableAdapters.TruckTableTableAdapter();
-            this.brandDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTruck)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.truckDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.truckTableBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,14 +48,36 @@
             this.dgvTruck.AutoGenerateColumns = false;
             this.dgvTruck.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTruck.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idDataGridViewTextBoxColumn,
             this.brandDataGridViewTextBoxColumn,
             this.priceDataGridViewTextBoxColumn});
             this.dgvTruck.DataSource = this.truckTableBindingSource;
             this.dgvTruck.Location = new System.Drawing.Point(74, 38);
             this.dgvTruck.Name = "dgvTruck";
             this.dgvTruck.Size = new System.Drawing.Size(305, 218);
-            this.dgvTruck.TabIndex = 0;
-            this.dgvTruck.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dgvTruck.TabIndex = 0;            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // brandDataGridViewTextBoxColumn
+            // 
+            this.brandDataGridViewTextBoxColumn.DataPropertyName = "Brand";
+            this.brandDataGridViewTextBoxColumn.HeaderText = "Brand";
+            this.brandDataGridViewTextBoxColumn.Name = "brandDataGridViewTextBoxColumn";
+            // 
+            // priceDataGridViewTextBoxColumn
+            // 
+            this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
+            this.priceDataGridViewTextBoxColumn.HeaderText = "Price";
+            this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
+            // 
+            // truckTableBindingSource
+            // 
+            this.truckTableBindingSource.DataSource = typeof(TruckList.Model.TruckTable);
             // 
             // textBrand
             // 
@@ -74,7 +94,7 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Add";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.btnadd);
             // 
             // button2
             // 
@@ -84,7 +104,7 @@
             this.button2.TabIndex = 3;
             this.button2.Text = "Delete";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.btndelate);
             // 
             // button3
             // 
@@ -94,7 +114,7 @@
             this.button3.TabIndex = 4;
             this.button3.Text = "Update";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.btnupdate);
             // 
             // textPrice
             // 
@@ -102,32 +122,6 @@
             this.textPrice.Name = "textPrice";
             this.textPrice.Size = new System.Drawing.Size(100, 20);
             this.textPrice.TabIndex = 5;
-            // 
-            // truckDBDataSet
-            // 
-            this.truckDBDataSet.DataSetName = "TruckDBDataSet";
-            this.truckDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // truckTableBindingSource
-            // 
-            this.truckTableBindingSource.DataMember = "TruckTable";
-            this.truckTableBindingSource.DataSource = this.truckDBDataSet;
-            // 
-            // truckTableTableAdapter
-            // 
-            this.truckTableTableAdapter.ClearBeforeFill = true;
-            // 
-            // brandDataGridViewTextBoxColumn
-            // 
-            this.brandDataGridViewTextBoxColumn.DataPropertyName = "Brand";
-            this.brandDataGridViewTextBoxColumn.HeaderText = "Brand";
-            this.brandDataGridViewTextBoxColumn.Name = "brandDataGridViewTextBoxColumn";
-            // 
-            // priceDataGridViewTextBoxColumn
-            // 
-            this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
-            this.priceDataGridViewTextBoxColumn.HeaderText = "Price";
-            this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
             // 
             // Form1
             // 
@@ -147,7 +141,6 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTruck)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.truckDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.truckTableBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -162,11 +155,10 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox textPrice;
-        private TruckDBDataSet truckDBDataSet;
-        private System.Windows.Forms.BindingSource truckTableBindingSource;
-        private TruckDBDataSetTableAdapters.TruckTableTableAdapter truckTableTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn brandDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource truckTableBindingSource;
     }
 }
 
